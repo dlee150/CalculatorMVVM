@@ -4,9 +4,69 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalculatorMVVM"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"    
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+   
+    <DockPanel>
         
-    </Grid>
+        <Grid DockPanel.Dock="Top" Height="30">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <syncfusion:UpDown Value="{Binding Value0}" Grid.Column="0"/>
+            <syncfusion:UpDown Value="{Binding Value1}" Grid.Column="1"/>
+            <Label Content="{Binding Result, Converter={StaticResource NumericToStringConverter}}" DockPanel.Dock="Right" Grid.Column="2" Background="Yellow"/>
+
+        </Grid>
+
+
+        <Grid DockPanel.Dock="Left" Margin="20">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="1" Grid.Row="0" Grid.Column="0" Style="{StaticResource ButtonStyle}" />
+            <Button Content="2" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="3" Grid.Row="0" Grid.Column="2" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="4" Grid.Row="1" Grid.Column="0" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="5" Grid.Row="1" Grid.Column="1" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="6" Grid.Row="1" Grid.Column="2" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="7" Grid.Row="2" Grid.Column="0" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="8" Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="9" Grid.Row="2" Grid.Column="2" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="0" Grid.Row="3" Grid.Column="1" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="." Grid.Row="3" Grid.Column="2" Style="{StaticResource ButtonStyle}"/>
+
+        </Grid>
+
+        <StackPanel>
+            <Button Content="+" Command="{Binding OperatorCommands}" CommandParameter="Add" Style="{StaticResource OperatorStyle}"/>
+            <Button Content="-" Command="{Binding OperatorCommands}" CommandParameter="Subtract" Style="{StaticResource OperatorStyle}"/>
+            <Button Content="*" Command="{Binding OperatorCommands}" CommandParameter="Multiply" Style="{StaticResource OperatorStyle}"/>
+            <Button Content="/" Command="{Binding OperatorCommands}" CommandParameter="Divide" Style="{StaticResource OperatorStyle}"/>
+            <Button Content="=" Command="{Binding OperatorCommands}" CommandParameter="Equal" Style="{StaticResource OperatorStyle}"/>
+        </StackPanel>
+    </DockPanel>
 </Window>
